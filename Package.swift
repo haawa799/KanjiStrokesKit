@@ -35,9 +35,6 @@ let package = Package(
             ],
             resources: [
                 .copy("KanjiBezierPaths_kanji.realm")
-            ],
-            swiftSettings: [
-                .unsafeFlags(["-suppress-warnings"]),
             ]
         ),
         .testTarget(
