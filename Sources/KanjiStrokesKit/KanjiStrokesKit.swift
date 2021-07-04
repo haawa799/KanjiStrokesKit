@@ -17,7 +17,7 @@ public typealias BezierPath = UIBezierPath
 import RealmSwift
 import Realm
 
-class Kanji: Object {
+class Kanji_pJBtRveA88nssCqiUaiP: Object {
     @objc dynamic var id = ""
     @objc dynamic var data = Data()
     override class func primaryKey() -> String? {
@@ -31,7 +31,7 @@ public class KanjiProvider {
         static let encodedBezierClass = "UIBezierPath"
         static let kanjiRealmFilename = "KanjiBezierPaths_kanji"
         static let realmExtension = "realm"
-        static let scheme: UInt64 = 6
+        static let scheme: UInt64 = 9
     }
     
     public static let bundle: Bundle = {
@@ -40,17 +40,21 @@ public class KanjiProvider {
     
     public init() throws {
         let bundleUrl = Bundle.module.url(forResource: Constants.kanjiRealmFilename, withExtension: Constants.realmExtension)!
+        print(bundleUrl)
         Realm.Configuration.defaultConfiguration = Realm.Configuration(readOnly: false,
                                                                        schemaVersion: Constants.scheme,
-                                                                       migrationBlock: { _, _ in },
-                                                                       objectTypes: [KanjiStrokesKit.Kanji.self])
+                                                                       migrationBlock: { _, _ in
+                                                                       },
+                                                                       objectTypes: [
+                                                                        KanjiStrokesKit.Kanji_pJBtRveA88nssCqiUaiP.self
+                                                                       ])
         realm = try Realm(fileURL: bundleUrl)
     }
     
     let realm: Realm
     
     public func pathesForKanji(_ kanji: String) -> [BezierPath]? {
-        guard let kanjiObj = realm.object(ofType: Kanji.self, forPrimaryKey: kanji) else { return nil }
+        guard let kanjiObj = realm.object(ofType: Kanji_pJBtRveA88nssCqiUaiP.self, forPrimaryKey: kanji) else { return nil }
         let data = kanjiObj.data
         
         #if os(OSX)
@@ -61,7 +65,7 @@ public class KanjiProvider {
     }
     
     func allKanjiArray() -> [[BezierPath]] {
-        return realm.objects(Kanji.self).compactMap { pathesForKanji($0.id) }
+        return realm.objects(Kanji_pJBtRveA88nssCqiUaiP.self).compactMap { pathesForKanji($0.id) }
     }
     
 }

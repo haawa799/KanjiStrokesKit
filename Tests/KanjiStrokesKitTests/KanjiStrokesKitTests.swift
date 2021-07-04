@@ -78,13 +78,13 @@ final class KanjiStrokesKitTests: XCTestCase {
     }
 
     func testRealmKanji() {
-        let kanji = Kanji()
+        let kanji = Kanji_pJBtRveA88nssCqiUaiP()
         kanji.id = "病"
         kanji.data = Data()
 
         XCTAssertEqual(kanji.id, "病")
         XCTAssertEqual(kanji.data.count, 0)
-        XCTAssertEqual(Kanji.primaryKey(), "id")
+        XCTAssertEqual(Kanji_pJBtRveA88nssCqiUaiP.primaryKey(), "id")
     }
 
     static var allTests = [
