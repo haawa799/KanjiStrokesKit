@@ -40,10 +40,10 @@ public class KanjiProvider {
     
     public init() throws {
         let bundleUrl = Bundle.module.url(forResource: Constants.kanjiRealmFilename, withExtension: Constants.realmExtension)!
-        Realm.Configuration.defaultConfiguration = Realm.Configuration(readOnly: false,
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(readOnly: true,
                                                                        schemaVersion: Constants.scheme,
-                                                                       migrationBlock: { _, _ in
-        })
+                                                                       migrationBlock: { _, _ in },
+                                                                       objectTypes: [KanjiStrokesKit.Kanji.self])
         realm = try Realm(fileURL: bundleUrl)
     }
     
