@@ -40,7 +40,7 @@ public class KanjiProvider {
     
     public init() throws {
         let bundleUrl = Bundle.module.url(forResource: Constants.kanjiRealmFilename, withExtension: Constants.realmExtension)!
-        Realm.Configuration.defaultConfiguration = Realm.Configuration(readOnly: true,
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(readOnly: false,
                                                                        schemaVersion: Constants.scheme,
                                                                        migrationBlock: { _, _ in },
                                                                        objectTypes: [KanjiStrokesKit.Kanji.self])
